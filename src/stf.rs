@@ -89,17 +89,19 @@ impl TimeSlot {
     }
 
     pub fn from_string(str: &str) -> Result<TimeSlot, Error> {
-        if str.len() == 0 {
+        if str.is_empty() {
             return Err(Error::InvalidInput);
+        }
+
+        for c in str.chars() {
+            if !ALLOWED_CHARACTERS.contains(&c) {
+                return Err(Error::InvalidInput);
+            }
         }
 
         let mut out = TimeSlot::empty();
 
         for (i, c) in str.chars().enumerate() {
-            if !ALLOWED_CHARACTERS.contains(&c) {
-                return Err(Error::InvalidInput);
-            }
-
             if c == 'M' || c == 'T' || c == 'N' {
                 out.add_days(&str[0..i])?;
                 out.set_shift(&c)?;
@@ -114,6 +116,7 @@ impl TimeSlot {
 
 #[cfg(test)]
 mod tests {
+    use std::vec::Vec;
     use super::*;
 
     #[test]
@@ -161,9 +164,19 @@ mod tests {
     }
 
     #[test]
-    fn there_are_only_four_periods_at_night () {
+    fn there_are_only_four_periods_at_night() {
         let string = "1234567N56";
         let ts = TimeSlot::from_string(string);
         assert!(ts.is_err());
+    }
+
+    #[test]
+    fn check_against_real_valid_input() {
+        let test_vec = vec!["2T12", "246M34", "246T56", "3T12", "6T3456", "246T12", "246M56", "7M3456", "6M56", "4T56", "35T56", "24T34", "35T12", "3M56", "35N34", "3N1234", "4M1234", "5T34", "35T34", "6N1234", "4N12", "6T56", "3N123", "3N34", "246T34", "3T1", "246N12", "7M34", "35M12", "24N34", "24T56", "24M56", "46M34", "35M34", "24T12", "246M12", "6N12", "3M34", "6T1234", "5T56", "6M3456", "35N12", "5N12", "24M34", "246N34", "3T56", "5N1234", "3T12", "24N12", "4M56", "3N12", "4T12", "46M12", "5N34", "35M56"];
+
+        for str in test_vec {
+            let ts = TimeSlot::from_string(str).unwrap();
+            assert_eq!(ts.to_string(), str);
+        }
     }
 }
