@@ -1,18 +1,18 @@
-use std::vec::Vec;
+//use std::vec::Vec;
 
-pub use self::day::Days;
-pub use self::shift::Shift;
-pub use self::period::Period;
+//pub use self::days::Days;
+//pub use self::shift::Shift;
+//pub use self::period::Period;
 
-pub mod day;
-pub mod shift;
-pub mod period;
+pub mod days;
+//pub mod shift;
+//pub mod period;
 
-struct SigaaTime {
-    weekdays: Days,
-    shift: Shift,
-    periods: Vec<Period>,
-}
+//struct SigaaTime {
+//    weekdays: Days,
+//    shift: Shift,
+//    periods: Vec<Period>,
+//}
 
 //impl fmt::Display for SigaaTime {
 //    fn fmt(&self, &mut fmt::Formater<'_>) -> fmt::Result {
