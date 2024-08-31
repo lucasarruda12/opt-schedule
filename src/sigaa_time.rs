@@ -1,6 +1,6 @@
 use std::vec::Vec;
 
-pub use self::day::Day;
+pub use self::day::Days;
 pub use self::shift::Shift;
 pub use self::period::Period;
 
@@ -9,7 +9,7 @@ pub mod shift;
 pub mod period;
 
 struct SigaaTime {
-    weekdays: Vec<Day>,
+    weekdays: Days,
     shift: Shift,
     periods: Vec<Period>,
 }
