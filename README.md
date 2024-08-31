@@ -1,2 +1,3 @@
 # opt-schedule
-CLI app written in rust to generate my class schedule for the semester, given all open classes and which ones i want to attend
+
+- This should take a look at the open classes for the next college semester and figure out which ones to take for The Best Schedule™.
