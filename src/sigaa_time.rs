@@ -5,7 +5,7 @@
 //pub use self::period::Period;
 
 pub mod days;
-//pub mod shift;
+pub mod shift;
 //pub mod period;
 
 //struct SigaaTime {
