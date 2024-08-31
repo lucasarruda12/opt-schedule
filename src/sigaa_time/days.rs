@@ -1,16 +1,11 @@
 /// - The first digits in the Sigaa Time Format represent days of the week.
 /// - Weekdays range from 2 to 6, as in portuguese they are called 'second' to 'sixth'.
-/// - Even though 1 is a valid day, i believe there aren't any classes on sunday. It is represented
-/// here anyway.
+/// - Even though 1 is a valid day, i believe there aren't any classes on sunday. It is represented here anyway.
 /// - 7 is also valid. I believe there are classes on saturday, but i've never seen/been to one.
 ///
-/// - I opted for an array of 8 boolean values to represent the sigaa day format.
-/// Even though i won't use the 0th position of the array, doing it this way it this way makes it
-/// makes sense to write certain_days.values[2] and i believe that makes this part of the code much more readable.
+/// - I opted for an array of 8 boolean values to represent the sigaa day format. Even though i won't use the 0th position of the array, doing it this way it this way makes it makes sense to write certain_days.values[2] and i believe that makes this part of the code much more readable.
 ///
-/// - I also opted to hide the array implementation here, and since i plan on using this part of
-/// the code for formating strings, all the interface of the methods were made to handle char or
-/// string arguments.
+/// - I also opted to hide the array implementation here, and since i plan on using this part of the code for formating strings, all the interface of the methods were made to handle char or string arguments.
 
 use std::cmp::PartialEq;
 use std::cmp::Eq;
@@ -41,7 +36,7 @@ impl Days {
         Days{values: [false; 8]}
     }
 
-    pub fn from_string(str: &String) -> Result<Days, String> {
+    pub fn from_string(str: &str) -> Result<Days, String> {
         let mut new = Days::new();
 
         for c in str.chars() {
@@ -77,10 +72,6 @@ impl Days {
             true => self.remove_day_from_usize(s),
             false => self.add_day_from_usize(s),
         }
-    }
-
-    fn from_slice(str: &str) -> Result<Days, String> {
-        Self::from_string(&str.to_string())
     }
 
     fn add_day_from_usize(&mut self, u: usize) -> Result<(), String> {
@@ -142,7 +133,7 @@ mod tests {
             "6",
             "7",
         ]{
-            let days = Days::from_slice(str).unwrap();
+            let days = Days::from_string(&str).unwrap();
             assert_eq!(days.to_string(), str.to_string());
         }
     }
@@ -156,7 +147,7 @@ mod tests {
             "pipoquinha",
             "ĺúćáś"
         ]{
-            let days = Days::from_slice(str);
+            let days = Days::from_string(&str);
             assert!(days.is_err());
         }
     }
@@ -202,10 +193,10 @@ mod tests {
 
     #[test]
     fn should_be_able_to_concat_two_days() {
-        let mut d1 = Days::from_slice("123").unwrap();
-        let d2 = Days::from_slice("456").unwrap();
+        let mut d1 = Days::from_string(&"123").unwrap();
+        let d2 = Days::from_string(&"456").unwrap();
         let _ = d1.concat(&d2);
 
-        assert_eq!(d1, Days::from_slice("123456").unwrap());
+        assert_eq!(d1, Days::from_string(&"123456").unwrap());
     }
 }
