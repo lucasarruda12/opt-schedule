@@ -1,6 +1,6 @@
 # opt-schedule
 
-- This should take a look at the open classes for the next college semester and figure out which ones to take for The Best Schedule™.
+This should take a look at the open classes for the next college semester and figure out which ones to take for The Best Schedule™.
 
 ## Sigaa Time Format (STF)
 This doesn't exactly have a name. I came up with Sigaa Time Format for variable-naming purposes. It refers to how the _Sistema Integrado de Gestão de Atividades Acadêmicas_ displays class schedules.
